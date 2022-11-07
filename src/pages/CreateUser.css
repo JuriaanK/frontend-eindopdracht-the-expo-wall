@@ -49,6 +49,17 @@
 
 }
 
+.button-form{
+    background-color: grey;
+    font-family: 'League Spartan', sans-serif;
+    width: 300px;
+    height: 30px;
+    color: darkgrey;
+    font-weight: 300;
+    font-size: 20px;
+    margin: 10px;
+}
+
 .invalid, .valid{
     font-weight: 300;
     font-size: 15px;

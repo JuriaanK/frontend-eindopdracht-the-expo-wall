@@ -11,6 +11,7 @@ function CreateUser(props) {
     const [password, setPassword] = useState("")
     const [passwordAgain, setPasswordAgain] = useState("")
 
+
     async function clickHandler() {
         const userData = JSON.stringify({
             username: `${name}`,
@@ -82,13 +83,19 @@ function CreateUser(props) {
                                         onChange={(isValid) => {}}
                                     />
                     </form>
-                        <Link to="/">
-                            <button
-                                className="button-create-form"
-                                onClick={clickHandler}>
-                                    next
-                            </button>
-                        </Link>
+
+                    <Link to="/account" disabled={!name || !email || !password}>
+                    <button
+                    className="button-create-form"
+                    disabled={!name || !email || !password}
+                    onClick={clickHandler}>
+                    next
+                    </button>
+                    </Link>
+
+
+
+
 
 
             </article>
