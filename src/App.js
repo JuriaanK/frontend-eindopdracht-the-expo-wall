@@ -1,24 +1,53 @@
-import logo from './logo.svg';
+import React, {useHistory, useState, useContext, useEffect} from "react";
 import './App.css';
+import {Switch, Route, Redirect ,Link } from 'react-router-dom';
+import { AuthContext } from './context/AuthContext';
+import Main from "./pages/Main";
+import Login from "./pages/Login";
+import Add from "./pages/Add";
+import Profile from "./pages/Profile";
+import Search from "./pages/Search";
+import CreateUser from "./pages/CreateUser";
+import Settings from "./pages/Settings";
+
 
 function App() {
+
+    const { isAuthenticated } = useContext(AuthContext);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+      <>
+
+      <Switch>
+          <Route exact path="/">
+              {isAuthenticated ? <Redirect to="/main"/> : <Login/>
+              }
+          </Route>
+          <Route path="/main">
+              {isAuthenticated === true &&
+               <Main />}
+          </Route>
+          <Route path="/add">
+              {isAuthenticated === true &&
+              <Add />}
+          </Route>
+          <Route path="/profile">
+              {isAuthenticated === true &&
+             <Profile />}
+          </Route>
+          <Route path="/search">
+              {isAuthenticated === true &&
+              <Search />}
+          </Route>
+          <Route path="/create">
+              {isAuthenticated === false &&
+              <CreateUser />}
+          </Route>
+          <Route path="/settings">
+              {isAuthenticated === true &&
+              <Settings />}
+          </Route>
+      </Switch>
+      </>
   );
 }
 

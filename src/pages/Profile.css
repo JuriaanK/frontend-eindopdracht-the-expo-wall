@@ -1,0 +1,12 @@
+section{
+    position: absolute;
+    top: 90px;
+    z-index: -2;
+}
+
+.bio-container{
+    background-color: white;
+    padding: 25px;
+    margin: 10px;
+    max-width: 300px;
+}

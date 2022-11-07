@@ -1,0 +1,31 @@
+@media (min-width: 768px){
+    .menu-item:hover{
+        background-color: #e6e6e6;
+
+    }
+    .menu-item{
+        height: 60px;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: black;
+        border-top: 1px solid  #FFF6DF;
+    }
+}
+
+@media (max-width: 768px){
+    .menu-item:hover {
+        background-color: #e6e6e6;
+    }
+
+    .menu-item {
+        display: flex;
+        height: 60px;
+        width: 100%;
+        justify-content: center;
+        align-items: center;
+        color: black;
+        border-bottom: 1px solid  #FFF6DF;
+    }
+}

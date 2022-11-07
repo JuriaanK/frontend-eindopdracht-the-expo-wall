@@ -1,0 +1,109 @@
+section{
+    position: absolute;
+    top: 90px;
+    z-index: -2;
+}
+
+.add{
+    display: flex;
+    flex-direction: row;
+    font-size: 80px;
+    margin-right: -50px;
+    margin-top: 10px;
+}
+
+.your{
+    display: flex;
+    flex-direction: row;
+    writing-mode: vertical-rl;
+    text-orientation: upright;
+    font-weight: 200;
+    font-size: 50px;
+
+}
+
+.art{
+    display: flex;
+    flex-direction: row;
+    font-size: 80px;
+    margin-left: -50px;
+    margin-top: 115px;
+}
+
+.tekst-art{
+    display: flex;
+    flex-direction: row;
+    margin-top: 50px;
+}
+
+.strong-text{
+    font-weight: 400;
+    margin-left: 3px;
+}
+
+.button-upload{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    background-color: black;
+    font-family: 'League Spartan', sans-serif;
+    text-decoration: none;
+    width: 290px;
+    height: 35px;
+    color: white;
+    font-weight: 200;
+    font-size: 20px;
+    margin: 10px;
+}
+
+.upload-form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: -65px;
+}
+
+.upload-input{
+    width: 290px;
+    height: 30px;
+    border-style: none;
+    background-color: white;
+    font-family: 'League Spartan', sans-serif;
+    color: black;
+    font-weight: 300;
+    font-size: 20px;
+    margin: 10px;
+    z-index: 6;
+    border-bottom-style: solid;
+    border-bottom-color: black ;
+}
+
+.status-check{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width:92%;
+    justify-content: space-between;
+    margin-top: -20px
+}
+
+.image-check{
+    font-weight: 300;
+    font-size: 30px;
+}
+
+.status{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    background-color: black;
+    color: white;
+    font-weight: 300;
+    font-size: 28px;
+    padding: 10px;
+}
+
+
+

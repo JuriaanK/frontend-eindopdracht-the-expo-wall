@@ -1,0 +1,55 @@
+.main-title-settings{
+    font-family: 'League Spartan', sans-serif;
+    color: black;
+    font-weight: 200;
+    font-size: 30px;
+}
+
+
+.bio-input{
+    width: 300px;
+    height:241px;
+    border-style: none;
+    background-color: white;
+    font-family: 'League Spartan', sans-serif;
+    color: black;
+    font-weight: 300;
+    font-size: 20px;
+    margin-top: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+    z-index: 6;
+    border-bottom-style: solid;
+    border-bottom-color: black ;
+}
+
+.setting-component-container{
+    display: flex;
+    flex-direction: row;
+    align-items: end;
+}
+
+@media(max-width: 700px){
+
+    .bio-input{
+        width: 300px;
+        height:241px;
+        border-style: none;
+        background-color: white;
+        font-family: 'League Spartan', sans-serif;
+        color: black;
+        font-weight: 300;
+        font-size: 20px;
+        margin: 10px;
+        z-index: 6;
+        border-bottom-style: solid;
+        border-bottom-color: black ;
+    }
+
+    .setting-component-container{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+}

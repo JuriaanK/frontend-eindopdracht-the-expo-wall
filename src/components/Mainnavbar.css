@@ -1,0 +1,126 @@
+.logo-small{
+    display: flex;
+    flex-direction: row;
+    max-width : 350px;
+    position: absolute;
+    left: calc(50% - 175px);
+    top: 3px;
+}
+.left-side, .right-side{
+    display: flex;
+    flex-direction: row;
+}
+
+ul{
+    display: flex;
+    flex-direction: row;
+}
+
+li{
+    display: flex;
+    flex-direction: row;
+
+    margin-right: 50px;
+    font-weight: 300;
+    font-size: 25px;
+    font-style: normal;
+    color: black;
+}
+
+.icon-button{
+    font-family: 'League Spartan', sans-serif;
+    color: black;
+    font-weight: 300;
+    font-size: 27px;
+}
+
+.search-button{
+    max-height: 40px;
+}
+
+.profile-image{
+    display: flex;
+    max-height: 50px;
+    border-radius: 50%;
+}
+
+.main-navbar-mobile{
+    display: none;
+}
+
+.dropdown-menu{
+    height: 0;
+    line-height: 240px;
+
+}
+
+@media (max-width: 768px) {
+    .left-side, .right-side {
+        display: none;
+    }
+
+    nav {
+        display: flex;
+        flex-direction: row-reverse;
+    }
+
+    .logo-small {
+        display: flex;
+        flex-direction: row;
+        max-width: 350px;
+        position: absolute;
+        z-index: 2;
+        left: 3%;
+
+    }
+
+    .main-navbar-mobile{
+        display: flex;
+    }
+    .dropdown-menu{
+        height: 0;
+        line-height: 240px;
+
+    }
+}
+
+@media (max-width: 460px) {
+    .left-side, .right-side {
+        display: none;
+    }
+
+    nav {
+        display: flex;
+        flex-direction: row-reverse;
+    }
+
+    .logo-small {
+        display: flex;
+        flex-direction: row;
+        max-width: 275px;
+        position: absolute;
+        z-index: 2;
+        left: 3%;
+
+    }
+    li{
+        display: flex;
+        flex-direction: row;
+
+        margin-right: 25px;
+        font-weight: 300;
+        font-size: 25px;
+        font-style: normal;
+        color: black;
+    }
+
+    .main-navbar-mobile{
+        display: flex;
+    }
+    .dropdown-menu{
+        height: 0;
+        line-height: 240px;
+
+    }
+}
+
