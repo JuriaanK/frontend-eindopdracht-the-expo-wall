@@ -1,36 +1,44 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import './ProImgUploader.css';
+import {useForm} from "react-hook-form";
+
+import {AuthContext} from "../context/AuthContext";
+import axios from "axios";
 
 function ProImgUploader(props) {
-    const uploadedImage = React.useRef(null);
-    const imageUploader = React.useRef(null);
-    const handleImageUpload = e => {
-        const [file] = e.target.files;
-        if(file) {
-            const reader = new FileReader();
-            const {current} = uploadedImage;
-            current.file = file;
-            reader.onload = (e) => {
-                current.src = e.target.result;
-            }
-            reader.readAsDataURL(file);
-        }
-    }
-    return (
-        <div className="main-upload-container">
-            <input
-                type="file"
-                accept="image/*"
-                multiple = "false"
-                onChange={handleImageUpload}
-                ref={imageUploader}
-                className="uploaded-image-input"/>
-            <span className="name-container">{props.title}</span>
-                <div className="uploaded-image-container" onClick={() => imageUploader.current.click()}>
-                    <img ref={uploadedImage} className="uploaded-image"/>
-                </div>
+    const { register, handleSubmit } = useForm();
+    const token = localStorage.getItem('token');
+    const { userDetails } = useContext(AuthContext);
+    const accountID = userDetails.accountID
 
-        </div>)
+
+    const onSubmit = async (data) => {
+        const formData = new FormData();
+        formData.append("id", accountID);
+        formData.append("profileImage", data.file[0]);
+
+        const customConfig = {
+            headers: {
+                "Content-Type": "multipart/form-data",
+                Authorization:`Bearer ${token}`,
+            }
+        };
+        const res = await axios.put("http://localhost:8081/accounts/addimage", formData, customConfig);
+        alert(JSON.stringify(`${res.message}, status: ${res.status}`));
+    };
+
+
+    return (
+        <>
+
+            <form className="from-container" onSubmit={handleSubmit(onSubmit)}  >
+                <input type="file" {...register("file")} />
+                <input type="submit" />
+            </form>
+            <img  />
+
+        </>
+    )
 }
 
 export default ProImgUploader;

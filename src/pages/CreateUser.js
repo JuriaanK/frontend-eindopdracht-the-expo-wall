@@ -1,16 +1,18 @@
-import React, {useState} from 'react';
+import React, {useState, useContext} from 'react';
 import PasswordChecklist from "react-password-checklist"
 import './CreateUser.css';
-import {Link} from "react-router-dom";
-import ProImgUploader from "../components/ProImgUploader";
 import axios from "axios";
+import {Link} from "react-router-dom";
 
 function CreateUser(props) {
+
     const [name, setName] = useState("")
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [passwordAgain, setPasswordAgain] = useState("")
-
+    const [firstName, setFirstname] = useState("")
+    const [lastName, setLastname] = useState("")
+    const [dateOfBirth, setDateOfBirth] = useState("")
 
     async function clickHandler() {
         const userData = JSON.stringify({
@@ -27,18 +29,43 @@ function CreateUser(props) {
         try {
             const response = await axios.post("http://localhost:8081/users", userData, customConfig);
             console.log('created user', response.data);
+            await HandlerAccount()
+
         } catch (e) {
             console.error(e);
         }
-    }
+
+        async function HandlerAccount() {
+            const userData = JSON.stringify({
+                firstName: `${firstName}`,
+                lastName:`${lastName}`,
+                DOB: `${dateOfBirth}`,
+                user: {username : `${name}`}
+            })
+            const customConfig = {
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            };
+
+            try {
+                const response = await axios.post("http://localhost:8081/accounts", userData, customConfig);
+                console.log('created account', response.data);
+            } catch (e) {
+                console.error(e);
+                await onSubmit(data)
+            }
+        }
+
+        }
 
     return (
         <>
-    <header className="create-header"> </header>
+        <header className="create-header"> </header>
         <section className="outer-container">
             <article className="inner-container">
                     <form className="create-form" onSubmit="">
-                        <h2>create a account | 1/3</h2>
+                        <h2>create a account</h2>
                         <label htmlFor="create-input">
                             <input
                                 className="create-input"
@@ -82,25 +109,48 @@ function CreateUser(props) {
                                         valueAgain={passwordAgain}
                                         onChange={(isValid) => {}}
                                     />
-                    </form>
 
-                    <Link to="/account" disabled={!name || !email || !password}>
+                        <label htmlFor="create-input">
+                            <input
+                                className="create-input"
+                                type="name"
+                                name="firstname"
+                                placeholder="firstname"
+                                onChange={(e) => setFirstname(e.target.value)}
+                            />
+                        </label>
+                        <label htmlFor="create-input">
+                            <input
+                                className="create-input"
+                                type="name"
+                                name="lastname"
+                                placeholder="lastname"
+                                onChange={(e) => setLastname(e.target.value)}
+                            />
+                        </label>
+                        <label htmlFor="create-input">
+                            <input
+                                className="create-input"
+                                type="dob"
+                                name="dateOfBirth"
+                                placeholder="date of birth"
+                                onChange={(e) => setDateOfBirth(e.target.value)}
+                            />
+                        </label>
+                    </form>
+                <Link to="/">
                     <button
                     className="button-create-form"
                     disabled={!name || !email || !password}
                     onClick={clickHandler}>
                     next
                     </button>
-                    </Link>
-
-
-
-
-
-
+                </Link>
             </article>
         </section>
-        </>);
+        </>
+    )
 }
 
 export default CreateUser;
+

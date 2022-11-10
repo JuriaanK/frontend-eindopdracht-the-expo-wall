@@ -7,7 +7,7 @@ function DropdownItem(props) {
         <Link   to={props.linkTo}
                 className="menu-item"
                 style={{textDecoration: 'none'}}>
-            {props.items}
+                {props.items}
         </Link>
     );
 }

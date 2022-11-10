@@ -47,9 +47,6 @@ function AuthContextProvider({ children }) {
                 }
             });
 
-
-
-
             console.log(response.data);
             setAuth({
                 ...auth,

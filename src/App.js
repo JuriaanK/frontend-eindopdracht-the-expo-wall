@@ -2,14 +2,15 @@ import React, {useHistory, useState, useContext, useEffect} from "react";
 import './App.css';
 import {Switch, Route, Redirect ,Link } from 'react-router-dom';
 import { AuthContext } from './context/AuthContext';
+
 import Main from "./pages/Main";
 import Login from "./pages/Login";
 import Add from "./pages/Add";
 import Profile from "./pages/Profile";
 import Search from "./pages/Search";
-import CreateUser from "./pages/CreateUser";
 import Settings from "./pages/Settings";
-import CreateAccount from "./pages/CreateAccount";
+
+import CreateUser from "./pages/CreateUser";
 
 
 function App() {
@@ -42,10 +43,6 @@ function App() {
           <Route path="/create">
               {isAuthenticated === false &&
               <CreateUser />}
-          </Route>
-          <Route exact path="/account">
-              {isAuthenticated === false &&
-                  <CreateAccount />}
           </Route>
           <Route path="/settings">
               {isAuthenticated === true &&

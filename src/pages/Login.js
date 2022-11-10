@@ -23,7 +23,6 @@ function Login() {
                 'Content-Type': 'application/json'
             }
         };
-
         try {
             const response = await axios.post("http://localhost:8081/auth", userData, customConfig);
             console.log('token uit de backend teruggekregen na inloggen', response.data);
@@ -42,7 +41,7 @@ function Login() {
                     <img src={logoBig} alt="the-expo-wall-logo" className="logo-login"/>
                 </header>
             </section>
-            <section className="outer-container kut">
+            <section className="outer-container">
                 <article className="inner-container">
                     <div className="login-form" onSubmit="">
                         <label for="login-input">
@@ -50,7 +49,7 @@ function Login() {
                                 className="login-input"
                                 type="text"
                                 onChange={(e) => setEmail(e.target.value)}
-                                placeholder="e-mail"
+                                placeholder="username"
                             />
                         </label>
                         <label for="login-input">

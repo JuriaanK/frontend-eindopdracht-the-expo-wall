@@ -11,7 +11,6 @@ function ArtWorksUploader(){
     const { userDetails } = useContext(AuthContext);
     const accountID = userDetails.accountID
 
-
             const onSubmit = async (data) => {
                 const formData = new FormData();
                 formData.append("artWorkImage", data.file[0]);
@@ -26,16 +25,12 @@ function ArtWorksUploader(){
                 alert(JSON.stringify(`${res.message}, status: ${res.status}`));
             };
 
-
     return (
         <>
-
             <form className="from-container" onSubmit={handleSubmit(onSubmit)}  >
                 <input type="file" {...register("file")} />
                 <input type="submit" />
             </form>
-            <img  />
-
         </>
         )
 }

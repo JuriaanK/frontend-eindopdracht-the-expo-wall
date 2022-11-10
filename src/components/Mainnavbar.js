@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React, {useContext, useState, useEffect} from 'react';
 import '../App.css';
 import './Mainnavbar.css';
 
@@ -9,12 +9,38 @@ import DropdownItem from "./Dropdownitem";
 
 import logoSmall from "../assets/logoEindOpdrachtV2.png";
 import searchButton from "../assets/searchButton.png";
-import profileImage from "../assets/profileImage.png";
+
 import mobileMenu from "../assets/mobileMenu.png";
 import {AuthContext} from "../context/AuthContext";
+import axios from "axios";
 
-function Mainnavbar(props) {
-    const { isAuthenticated } = useContext(AuthContext);
+function Mainnavbar() {
+    const token = localStorage.getItem('token');
+
+    const { logoutFunction, userDetails } = useContext(AuthContext);
+    const accountID = userDetails.accountID;
+    const [profileImage, SetProfileImage] = useState("");
+
+    useEffect(()=> {
+    async function fetchData(){
+        const customConfig = {
+            headers: {
+                Authorization:`Bearer ${token}`,
+            }
+        };
+
+        try {
+            const result = await axios.get(`http://localhost:8081/accounts/${accountID}`, customConfig);
+            console.log(result.data)
+            SetProfileImage(result.data)
+        }catch (e){
+            console.log(e)
+        }
+    }
+    fetchData()
+    },[])
+
+
     return (
         <>
             <NavBar className="main-navbar">
@@ -40,9 +66,13 @@ function Mainnavbar(props) {
                             <DropdownItem
                                 items="settings"
                                 linkTo="/settings"/>
+                            <button className="logout-button"
+                                onClick={logoutFunction}>
                             <DropdownItem
                                 items="logout"
-                                linkTo="/"/>
+                                linkTo="/"
+                                />
+                            </button>
                         </DropdownMenu>
                     </NavItem>
                 </div>
@@ -63,8 +93,15 @@ function Mainnavbar(props) {
                                 items="profile"
                                 linkTo="/profile"/>
                             <DropdownItem
+                                items="settings"
+                                linkTo="/settings"/>
+                            <button className="logout-button"
+                                    onClick={logoutFunction}>
+                            <DropdownItem
                                 items="logout"
-                                linkTo="/"/>
+                                linkTo="/"
+                                />
+                            </button>
                         </DropdownMenu>
                     </NavItem>
                 </div>

@@ -1,12 +1,44 @@
-import React, {useState}from 'react';
+import React, { useState, useContext }from 'react';
 import './Settings.css';
 import Mainnavbar from "../components/Mainnavbar";
 import ProImgUploader from "../components/ProImgUploader";
+import PasswordChecklist from "react-password-checklist";
+import axios from "axios";
+import {AuthContext} from "../context/AuthContext";
 
 function Settings(props) {
-    const [NewPassword, setNewPassword] = useState("");
-    const [NewPasswordSec, setPasswordSec] = useState("");
-    const [bioText, setBioText] = useState("");
+    const token = localStorage.getItem('token');
+
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+    const [passwordAgain, setPasswordAgain] = useState('')
+    const { userDetails } = useContext(AuthContext);
+    const user = userDetails.username;
+    const [bioText, setBioText] = useState('');
+
+
+    async function clickHandler() {
+        const userData = JSON.stringify({
+            email:`${email}`,
+            password: `${password}`,
+            userBio: `${bioText}`,
+        })
+        const customConfig = {
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization:`Bearer ${token}`,
+            }
+        };
+
+        try {
+            const response = await axios.put(`http://localhost:8081/users/${user}`, userData, customConfig);
+            console.log(`changed ${user}`, response.data);
+
+        } catch (e) {
+            console.error(e);
+        }
+}
+
     return (<>
         <Mainnavbar/>
 
@@ -19,35 +51,61 @@ function Settings(props) {
                     <label htmlFor="create-input">
                         <input
                             className="create-input"
-                            type="password"
-                            name="new password"
-                            value={NewPassword}
-                            placeholder="new password"
+                            type="email"
+                            name="email"
+                            placeholder="change e-mail"
+                            onChange={(e) => setEmail(e.target.value)}
                         />
                     </label>
-                    <label htmlFor="create-input">
+                    <label>
+                        <textarea
+                            className="bio-input"
+                            type="text"
+                            name="bio-text"
+                            placeholder="write new bio"
+                            onChange={(e) => setBioText(e.target.value)}
+                    />
+                    </label>
+                    <label>
                         <input
                             className="create-input"
                             type="password"
-                            name="new password"
-                            value={NewPasswordSec}
-                            placeholder="new password check"
+                            placeholder="new password"
+                            onChange={(e) => setPassword(e.target.value)}
                         />
                     </label>
-                </form>
+                    <label>
+                        <input
+                            className="create-input"
+                            type="password"
+                            placeholder="new password check"
+                            onChange={(e) => setPasswordAgain(e.target.value)}
+                        />
+                    </label>
 
-                <form className="bio-form">
-                    <input  className="bio-input"
-                            type="text"
-                            name="bio-text"
-                            value={bioText}
-                            placeholder="write new bio"/>
+                    <PasswordChecklist
+                        className="password-checker"
+                        rules={["minLength","specialChar","number","capital","match"]}
+                        minLength={5}
+                        value={password}
+                        valueAgain={passwordAgain}
+                        onChange={(isValid) => {}}
+                    />
                 </form>
+                        <ProImgUploader
+                            title="click to change profile image"/>
+                            <button
+                                className="button-create-form"
+                                onClick={clickHandler}>
+                                save changes
+                            </button>
+
+
+
+
                     </div>
-                <ProImgUploader
-                title="click to change profile image"/>
                 </div>
-                <button className="button-login">save changes</button>
+
             </article>
         </section>
 

@@ -5,42 +5,34 @@ import Mainnavbar from "../components/Mainnavbar";
 
 import {AiFillHeart} from 'react-icons/ai'
 
-import banksyOne from "../assets/testImages/testArt/banksy-one.jpg";
-import banksyTwo from "../assets/testImages/testArt/banksy-two.jpg";
-import banksyThree from "../assets/testImages/testArt/banksy-three.jpg";
-
-import breitnerOne from "../assets/testImages/testArt/breitner-one.jpg";
-import breitnerTwo from "../assets/testImages/testArt/breitner-two.jpg";
-import breitnerThree from "../assets/testImages/testArt/breitner-three.jpg";
-
-import balOne from "../assets/testImages/testArt/dirk-bal-one.jpg";
-import balTwo from "../assets/testImages/testArt/dirk-bal-two.jpg";
-import balThree from "../assets/testImages/testArt/dirk-bal-three.jpg";
-
-import mondriaanOne from "../assets/testImages/testArt/mondriaan-one.jpg";
-import mondriaanTwo from "../assets/testImages/testArt/mondriaan-two.jpg";
-import monderiaanThree from "../assets/testImages/testArt/mondriaan-three.jpg";
-import {Modal} from "react-bootstrap";
+import axios from "axios";
 
 function Main() {
+    const token = localStorage.getItem('token');
 
+    const [artWorkData, setArtworkData] = useState("");
 
-    const listOfArt = [
+    useEffect(()=> {
 
-        `${banksyOne}`,
-        `${banksyTwo}`,
-        `${banksyThree}`,
-        `${breitnerOne}`,
-        `${breitnerTwo}`,
-        `${breitnerThree}`,
-        `${balOne}`,
-        `${balTwo}`,
-        `${balThree}`,
-        `${mondriaanOne}`,
-        `${mondriaanTwo}`,
-        `${monderiaanThree}`
+            async function fetchData(){
+                const customConfig = {
+                    headers: {
+                        Authorization:`Bearer ${token}`,
+                    }
+                };
 
-    ];
+            try {
+                const result = await axios.get("http://localhost:8081/artworks", customConfig);
+                console.log(result.data)
+                setArtworkData(result.data)
+            }catch (e){
+                console.log(e)
+            }
+        }
+        console.log(artWorkData)
+        fetchData()
+    },[])
+
 
     const [show, setShow] = useState(false);
     return (
@@ -49,11 +41,12 @@ function Main() {
             <section className="outer-container">
                 <article className="inner-container">
                     <div className="artwork-container">
-                    {listOfArt.map((artWork)=>{
+                    {artWorkData && artWorkData.map((artWork)=>{
+                        console.log(artWork)
                         return<div className="single-artwork-container">
                             <ModalImage
-                                small={artWork}
-                                large={artWork}
+                                small={`data:image/jpg;base64,${artWork.artWorkImage}`}
+                                large={`data:image/jpg;base64,${artWork.artWorkImage}`}
                                 className="main-artworks"
                             />
                             <AiFillHeart className="like-heart"/>

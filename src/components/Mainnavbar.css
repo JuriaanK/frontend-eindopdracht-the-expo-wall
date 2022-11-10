@@ -48,6 +48,25 @@ li{
     display: none;
 }
 
+.logout-button{
+    font-family: 'League Spartan', sans-serif;
+    color: black;
+    font-weight: 300;
+    font-size: 25px;
+    height: 60px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: black;
+    border-top: 1px solid  #FFF6DF;
+
+}
+
+.logout-button:hover{
+    background-color: #e6e6e6;
+
+}
 .dropdown-menu{
     height: 0;
     line-height: 240px;
