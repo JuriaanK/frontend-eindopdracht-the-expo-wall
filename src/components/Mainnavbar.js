@@ -32,7 +32,7 @@ function Mainnavbar() {
         try {
             const result = await axios.get(`http://localhost:8081/accounts/${accountID}`, customConfig);
             console.log(result.data)
-            SetProfileImage(result.data)
+            SetProfileImage(result.data.profileImage)
         }catch (e){
             console.log(e)
         }
@@ -58,7 +58,7 @@ function Mainnavbar() {
                         icon={<img src={searchButton} alt="searchButton" className="search-button"/>}
                         linkTo="/search"/>
                     <NavItem
-                        icon={<img src={profileImage} alt="profileImage" className="profile-image"/>}>
+                        icon={<img src={`data:image/jpg;base64,${profileImage}`} alt="profileImage" className="profile-image"/>}>
                         <DropdownMenu ClassName="dropdown-menu">
                             <DropdownItem
                                 items="profile"
