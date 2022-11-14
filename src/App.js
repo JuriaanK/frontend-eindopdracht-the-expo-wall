@@ -7,7 +7,6 @@ import Main from "./pages/Main";
 import Login from "./pages/Login";
 import Add from "./pages/Add";
 import Profile from "./pages/Profile";
-import Search from "./pages/Search";
 import Settings from "./pages/Settings";
 
 import CreateUser from "./pages/CreateUser";
@@ -35,10 +34,6 @@ function App() {
           <Route path="/profile">
               {isAuthenticated === true &&
              <Profile />}
-          </Route>
-          <Route path="/search">
-              {isAuthenticated === true &&
-              <Search />}
           </Route>
           <Route path="/create">
               {isAuthenticated === false &&

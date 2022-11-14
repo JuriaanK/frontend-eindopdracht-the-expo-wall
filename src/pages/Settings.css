@@ -5,6 +5,9 @@
     font-size: 30px;
 }
 
+button{
+    border-style: none;
+}
 
 .bio-input{
     width: 300px;

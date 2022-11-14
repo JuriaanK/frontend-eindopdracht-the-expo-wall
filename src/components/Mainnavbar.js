@@ -8,7 +8,6 @@ import DropdownMenu from "./Dropdownmenu";
 import DropdownItem from "./Dropdownitem";
 
 import logoSmall from "../assets/logoEindOpdrachtV2.png";
-import searchButton from "../assets/searchButton.png";
 
 import mobileMenu from "../assets/mobileMenu.png";
 import {AuthContext} from "../context/AuthContext";
@@ -55,9 +54,6 @@ function Mainnavbar() {
                 <img src={logoSmall} alt="logo-small" className="logo-small"/>
                 <div className="right-side">
                     <NavItem
-                        icon={<img src={searchButton} alt="searchButton" className="search-button"/>}
-                        linkTo="/search"/>
-                    <NavItem
                         icon={<img src={`data:image/jpg;base64,${profileImage}`} alt="profileImage" className="profile-image"/>}>
                         <DropdownMenu ClassName="dropdown-menu">
                             <DropdownItem
@@ -67,7 +63,7 @@ function Mainnavbar() {
                                 items="settings"
                                 linkTo="/settings"/>
                             <button className="logout-button"
-                                onClick={logoutFunction}>
+                                    onClick={logoutFunction}>
                             <DropdownItem
                                 items="logout"
                                 linkTo="/"
@@ -86,9 +82,6 @@ function Mainnavbar() {
                             <DropdownItem
                                 items="add"
                                 linkTo="/add"/>
-                            <DropdownItem
-                                items="search"
-                                linkTo="/search"/>
                             <DropdownItem
                                 items="profile"
                                 linkTo="/profile"/>

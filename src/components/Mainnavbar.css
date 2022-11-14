@@ -58,6 +58,7 @@ li{
     display: flex;
     justify-content: center;
     align-items: center;
+    background-color: white;
     color: black;
     border-top: 1px solid  #FFF6DF;
 
