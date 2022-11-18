@@ -4,7 +4,9 @@ import Mainnavbar from "../components/Mainnavbar";
 import {AuthContext} from "../context/AuthContext";
 import axios from "axios";
 import ModalImage from "react-modal-image";
+
 import {AiFillHeart} from "react-icons/ai";
+import defaultImage from '../assets/profileImageJPG.jpg';
 
 
 function Profile(props) {
@@ -59,10 +61,14 @@ function Profile(props) {
                     <div className="artwork-container">
                     <div className="bio-container">
                         <div className="image-container">
-                            <img
+                            {profileImage != null && <img
                                 className="profile-image"
                                 src={`data:image/jpg;base64,${profileImage}`}
-                                alt="profile-image"/>
+                                alt="profile-image"/>}
+                            {profileImage == null && <img
+                                className="profile-image"
+                                src={defaultImage}
+                                alt="profile-image"/>}
                         </div>
                         <span>{bioText}</span>
                     </div>

@@ -23,10 +23,27 @@
     margin-top: 30px;
 }
 
-.like-heart{
-    position: relative;
-    left: 310px;
-    bottom: 40px;
+.delete-cross{
     color: white;
     font-size: 25px;
 }
+
+.delete-cross:hover{
+    color: darkred;
+    font-size: 25px;
+}
+
+.delete-button{
+    position: relative;
+    left: 310px;
+    bottom: 40px;
+    background: none;
+    color: inherit;
+    border: none;
+    cursor:pointer;
+}
+
+
+
+
+

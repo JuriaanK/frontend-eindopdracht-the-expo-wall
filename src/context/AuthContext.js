@@ -47,7 +47,13 @@ function AuthContextProvider({ children }) {
                 }
             });
 
-            console.log(response.data);
+            const response2 = await axios.get(`http://localhost:8081/roles/${username}`, {
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${token}`,
+                }
+            });
+
             setAuth({
                 ...auth,
                 isAuth: true,
@@ -56,7 +62,7 @@ function AuthContextProvider({ children }) {
                     email: response.data.email,
                     username: response.data.username,
                     accountID: response.data.accountID,
-
+                    rolename: response2.data[0].rolename,
                 },
             })
         } catch (e) {

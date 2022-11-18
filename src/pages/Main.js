@@ -1,16 +1,43 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, useContext} from 'react';
 import ModalImage from "react-modal-image";
 import './Main.css';
 import Mainnavbar from "../components/Mainnavbar";
+import defaultImage from '../assets/profileImageJPG.jpg'
 
-import {AiFillHeart} from 'react-icons/ai'
+import { GoX } from "react-icons/go";
 
 import axios from "axios";
 
+import {AuthContext} from "../context/AuthContext";
+
 function Main() {
     const token = localStorage.getItem('token');
+    const { userDetails } = useContext(AuthContext);
+    const userRole = userDetails.rolename;
 
     const [artWorkData, setArtworkData] = useState("");
+    const [isDeleted, setIsDeleted] = useState(false);
+
+     async function DeleteImage(imageID) {
+
+         const customConfig = {
+             headers: {
+                 Authorization: `Bearer ${token}`,
+             }
+         };
+
+         try {
+             const result = await axios.delete(`http://localhost:8081/artworks/${imageID}`, customConfig);
+             console.log(`delete id: ${imageID}` )
+             setIsDeleted(true)
+            console.log(result)
+         } catch (e) {
+             console.log(e)
+         }
+         setIsDeleted(false)
+     }
+
+
 
     useEffect(()=> {
 
@@ -30,9 +57,11 @@ function Main() {
             }
         }
         console.log(artWorkData)
-        fetchData()
-    },[])
 
+            fetchData()
+
+
+    },[isDeleted])
 
     const [show, setShow] = useState(false);
     return (
@@ -49,7 +78,13 @@ function Main() {
                                 large={`data:image/jpg;base64,${artWork.artWorkImage}`}
                                 className="main-artworks"
                             />
-                            <AiFillHeart className="like-heart"/>
+                            {userRole === 'ADMIN' &&
+                            <button
+                                className="delete-button"
+                                type="button"
+                                onClick={() => DeleteImage(artWork.artWorkID)}>
+                                <GoX className="delete-cross" />
+                            </button>}
                         </div>
 
                     }) }

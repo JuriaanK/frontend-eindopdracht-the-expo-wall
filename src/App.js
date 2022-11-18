@@ -10,6 +10,7 @@ import Profile from "./pages/Profile";
 import Settings from "./pages/Settings";
 
 import CreateUser from "./pages/CreateUser";
+import CreateAdmin from "./pages/CreateAdmin";
 
 
 function App() {
@@ -38,6 +39,10 @@ function App() {
           <Route path="/create">
               {isAuthenticated === false &&
               <CreateUser />}
+          </Route>
+          <Route path="/create-admin">
+              {isAuthenticated === true &&
+                  <CreateAdmin />}
           </Route>
           <Route path="/settings">
               {isAuthenticated === true &&

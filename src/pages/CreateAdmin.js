@@ -1,11 +1,12 @@
-import React, {useState, useContext} from 'react';
-import PasswordChecklist from "react-password-checklist"
-import './CreateUser.css';
+import React, { useState } from 'react';
+import './CreateAdmin.css';
 import axios from "axios";
-import {Link} from "react-router-dom";
+import PasswordChecklist from "react-password-checklist";
+import { Link } from "react-router-dom";
+import Mainnavbar from "../components/Mainnavbar";
 
-function CreateUser(props) {
-
+function CreateAdmin(props) {
+    const token = localStorage.getItem('token');
     const [name, setName] = useState("")
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
@@ -24,13 +25,14 @@ function CreateUser(props) {
         })
         const customConfig = {
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${token}`,
             }
         };
 
         try {
-            const response = await axios.post("http://localhost:8081/users", userData, customConfig);
-            console.log('created user', response.data);
+            const response = await axios.post("http://localhost:8081/users/admin", userData, customConfig);
+            console.log('created admin', response.data);
             await HandlerAccount()
 
         } catch (e) {
@@ -62,11 +64,12 @@ function CreateUser(props) {
 
     return (
         <>
-        <header className="create-header"> </header>
-        <section className="outer-container">
-            <article className="inner-container">
+            <Mainnavbar/>
+
+            <section className="outer-container">
+                <article className="inner-container">
                     <form className="create-form" onSubmit="">
-                        <h2>create a account</h2>
+                        <h2>create a admin account</h2>
                         <label htmlFor="create-input">
                             <input
                                 className="create-input"
@@ -85,31 +88,31 @@ function CreateUser(props) {
                                 onChange={(e) => setEmail(e.target.value)}
                             />
                         </label>
-                            <label>
+                        <label>
                             <input
                                 className="create-input"
                                 type="password"
                                 placeholder="password"
                                 onChange={(e) => setPassword(e.target.value)}
                             />
-                            </label>
-                                <label>
-                                <input
-                                    className="create-input"
-                                    type="password"
-                                    placeholder="password check"
-                                    onChange={(e) => setPasswordAgain(e.target.value)}
-                                />
-                                </label>
+                        </label>
+                        <label>
+                            <input
+                                className="create-input"
+                                type="password"
+                                placeholder="password check"
+                                onChange={(e) => setPasswordAgain(e.target.value)}
+                            />
+                        </label>
 
-                                    <PasswordChecklist
-                                        className="password-checker"
-                                        rules={["minLength","specialChar","number","capital","match"]}
-                                        minLength={5}
-                                        value={password}
-                                        valueAgain={passwordAgain}
-                                        onChange={(isValid) => {}}
-                                    />
+                        <PasswordChecklist
+                            className="password-checker"
+                            rules={["minLength","specialChar","number","capital","match"]}
+                            minLength={5}
+                            value={password}
+                            valueAgain={passwordAgain}
+                            onChange={(isValid) => {}}
+                        />
 
                         <label htmlFor="create-input">
                             <input
@@ -139,19 +142,18 @@ function CreateUser(props) {
                             />
                         </label>
                     </form>
-                <Link to="/">
-                    <button
-                    className="button-create-form"
-                    disabled={!name || !email || !password}
-                    onClick={clickHandler}>
-                    next
-                    </button>
-                </Link>
-            </article>
-        </section>
+                    <Link to="/">
+                        <button
+                            className="button-create-form"
+                            disabled={!name || !email || !password}
+                            onClick={clickHandler}>
+                            next
+                        </button>
+                    </Link>
+                </article>
+            </section>
         </>
-    )
+    );
 }
 
-export default CreateUser;
-
+export default CreateAdmin;

@@ -8,6 +8,7 @@ import DropdownMenu from "./Dropdownmenu";
 import DropdownItem from "./Dropdownitem";
 
 import logoSmall from "../assets/logoEindOpdrachtV2.png";
+import defaultImage from '../assets/profileImageJPG.jpg';
 
 import mobileMenu from "../assets/mobileMenu.png";
 import {AuthContext} from "../context/AuthContext";
@@ -18,6 +19,7 @@ function Mainnavbar() {
 
     const { logoutFunction, userDetails } = useContext(AuthContext);
     const accountID = userDetails.accountID;
+    const userRole = userDetails.rolename;
     const [profileImage, SetProfileImage] = useState("");
 
     useEffect(()=> {
@@ -40,6 +42,9 @@ function Mainnavbar() {
     },[])
 
 
+
+
+
     return (
         <>
             <NavBar className="main-navbar">
@@ -53,12 +58,46 @@ function Mainnavbar() {
                 </div>
                 <img src={logoSmall} alt="logo-small" className="logo-small"/>
                 <div className="right-side">
-                    <NavItem
-                        icon={<img src={`data:image/jpg;base64,${profileImage}`} alt="profileImage" className="profile-image"/>}>
+                    {profileImage != null && <NavItem
+                        icon={<img
+                            src={`data:image/jpg;base64,${profileImage}`}
+                            alt="profileImage"
+                            className="profile-image"/>}
+                    >
+                        <DropdownMenu ClassName="dropdown-menu">
+                        <DropdownItem
+                            items="profile"
+                            linkTo="/profile"/>
+                            {userRole === 'ADMIN' &&
+                            <DropdownItem
+                                items="create admin"
+                                linkTo="/create-admin"/>}
+                        <DropdownItem
+                            items="settings"
+                            linkTo="/settings"/>
+                        <button className="logout-button"
+                                onClick={logoutFunction}>
+                            <DropdownItem
+                                items="logout"
+                                linkTo="/"
+                            />
+                        </button>
+                    </DropdownMenu>
+                    </NavItem>}
+                    {profileImage == null && <NavItem
+                        icon={<img
+                            src={defaultImage}
+                            alt="profileImage"
+                            className="profile-image"/>}
+                    >
                         <DropdownMenu ClassName="dropdown-menu">
                             <DropdownItem
                                 items="profile"
                                 linkTo="/profile"/>
+                            {userRole === 'ADMIN' &&
+                                <DropdownItem
+                                    items="create admin"
+                                    linkTo="/create-admin"/>}
                             <DropdownItem
                                 items="settings"
                                 linkTo="/settings"/>
@@ -70,7 +109,7 @@ function Mainnavbar() {
                                 />
                             </button>
                         </DropdownMenu>
-                    </NavItem>
+                </NavItem>}
                 </div>
                 <div  className="main-navbar-mobile">
                     <NavItem
@@ -88,6 +127,10 @@ function Mainnavbar() {
                             <DropdownItem
                                 items="settings"
                                 linkTo="/settings"/>
+                            {userRole === 'ADMIN' &&
+                                <DropdownItem
+                                    items="create admin"
+                                    linkTo="/create-admin"/>}
                             <button className="logout-button"
                                     onClick={logoutFunction}>
                             <DropdownItem
