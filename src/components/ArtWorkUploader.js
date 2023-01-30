@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import './ArtWorkUploader.css';
 import axios from "axios";
 import { AuthContext } from '../context/AuthContext';
+import {upload} from "@testing-library/user-event/dist/upload";
 
 
 function ArtWorksUploader(){
@@ -21,8 +22,15 @@ function ArtWorksUploader(){
                         Authorization:`Bearer ${token}`,
                     }
                 };
-                const res = await axios.post("http://localhost:8081/artworks/upload", formData, customConfig);
-                alert(JSON.stringify(`${res.message}, status: ${res.status}`));
+                try{
+                    const res = await axios.post("http://localhost:8081/artworks/upload", formData, customConfig);
+                    alert('upload succeed')
+                }
+                catch (e) {
+                    alert('image size is too large')
+                }
+
+
             };
 
     return (

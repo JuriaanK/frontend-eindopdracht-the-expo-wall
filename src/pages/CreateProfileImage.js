@@ -17,7 +17,12 @@ function CreateProfileImage(props) {
             }
         };
         const res = await axios.post("http://localhost:8081/artworks/upload", formData, customConfig);
-        alert(JSON.stringify(`${res.message}, status: ${res.status}`));
+        if(res.status === 200){
+            alert('Upload succeed')
+        }
+        if (res.status === 500){
+            alert('Image file size is too large')
+        }
     };
 
     return (

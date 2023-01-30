@@ -28,9 +28,9 @@ function Login() {
             console.log('token uit de backend teruggekregen na inloggen', response.data);
             loginFunction(response.data);
 
-
         } catch (e) {
             console.error(e);
+            alert('invalid username or password, please try again')
         }
     }
     return (

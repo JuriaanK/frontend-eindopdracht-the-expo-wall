@@ -81,7 +81,6 @@ function Profile(props) {
                                     large={`data:image/jpg;base64,${artWork.artWorkImage}`}
                                     className="main-artworks"
                                 />
-                                <AiFillHeart className="like-heart"/>
                             </div>
 
                         }) }
