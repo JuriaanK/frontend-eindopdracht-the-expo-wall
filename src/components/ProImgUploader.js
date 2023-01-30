@@ -23,8 +23,14 @@ function ProImgUploader(props) {
                 Authorization:`Bearer ${token}`,
             }
         };
-        const res = await axios.put("http://localhost:8081/accounts/addimage", formData, customConfig);
-        alert(JSON.stringify(`${res.message}, status: ${res.status}`));
+
+        try{
+            const res = await axios.put("http://localhost:8081/accounts/addimage", formData, customConfig);
+        }
+        catch (e){
+            alert('image size is too large')
+        }
+
     };
 
 
